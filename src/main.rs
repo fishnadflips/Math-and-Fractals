@@ -2,6 +2,10 @@ use plotters::prelude::*;
 use num_complex::*;
 use std::*;
 
+// When plotting complex numbers, they are represented lkke this: a + bi
+// where a is the real part of the number and bi is the imaginary part.
+// When plotting, the x axis represents the real part and y is the imaginary.
+// So for example, (3, 5) on the graph is just the number  3 + 5i ; it's not really two seperate coordinates.
 
 fn main() {
     let MAX_ITERATIONS = 100;
@@ -15,7 +19,8 @@ fn main() {
  
     let (x, y) = drawing_area.get_pixel_range();
 
-    for i in x.start..x.end {
+    //Plot the points for each point on the graph
+    for i in x.start..x.end { 
         for j in y.start..y.end {
             input = num_complex::Complex{re: ((i -500) as f64)/250.0, im: ((j-500) as f64)/250.0}; //This line is pretty finicky - it adjusts how much of the set you can see
             if mandelbrot(input, MAX_ITERATIONS) != 100 {
@@ -41,7 +46,3 @@ fn mandelbrot(c : num_complex::Complex<f64>, I:i32) -> i32 { //This function sho
     return i; //Return number of iterations to diverge
 }
 
-//So........
-//x is the real part of the number
-//y is the complex part of the number
-// For example , z^2 + i: any given input to the next iteration of z will be 
